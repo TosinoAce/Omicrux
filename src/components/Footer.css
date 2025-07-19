@@ -1,0 +1,121 @@
+footer {
+  padding: 50px 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  position: relative;
+}
+#footer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 50px;
+}
+#f-logo{
+  width: 300px;
+}
+.Socials{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.Socials img{
+    width: 45px;
+    cursor: pointer;
+}
+#Big-text {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-height: 180px;
+  overflow: hidden;
+}
+#footer-big {
+  font-size: 300px;
+  font-family: "League Spartan", sans-serif;
+}
+#copyright {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  padding: 30px 50px;
+  background-color: #1a1919;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  box-shadow: -1px -20px 44px -2px rgba(255,255,255,0.75);
+  -webkit-box-shadow: -1px -20px 44px -2px rgba(255,255,255,0.75);
+  -moz-box-shadow: -1px -20px 44px -2px rgba(255,255,255,0.75);
+}
+#copyright p{
+    cursor: pointer;
+}
+#footer-links{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px;
+}
+#footer-links li{
+    margin-bottom: 15px;
+}
+.bold{
+    font-weight: bold;
+}
+
+
+@media (max-width: 1796px){
+  footer{
+    padding: 50px;
+  }
+  #footer-big{
+  font-size: 200px;
+}
+}
+
+
+@media (max-width: 981px){
+  footer {
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+}
+#footer-links{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0px;
+    gap: 20px;
+}
+#f-logo{
+  width: 200px;
+}
+#footer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 0px;
+  flex-direction: column;
+}
+.Socials img{
+    width: 30px;
+}
+#copyright{
+  padding: 30px 20px;
+}
+#footer-big{
+  font-size: 120px;
+}
+}
+@media (max-width: 656px){
+  #footer-big{
+  font-size: 60px;
+}
+}

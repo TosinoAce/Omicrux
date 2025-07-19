@@ -1,0 +1,55 @@
+#contact-hero{
+    width: 100%;
+    min-height: 80vh;
+    background-image: url(/contactBG.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+#contact-hero::after{
+    content: " ";
+    position: absolute;
+    inset: 0 0 0 0;
+    background-color: #000000ac;
+    z-index: 2;
+}
+#contact-hero > div{
+    position: absolute;
+    z-index: 3;
+    inset: 0 0 0 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 100px 50px;
+}
+#contact-hero > div > h2{
+    font-size: 60px;
+    font-family: "League Spartan", sans-serif;
+    margin-bottom: 15px;
+    max-width: 1000px;
+}
+#contact-hero > div > h2 span{
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+}
+#contact-hero > div p{
+    font-size: 20px;
+    max-width: 1100px;
+    line-height: 200%;
+}
+
+
+
+@media (max-width: 737px) {
+#contact-hero > div > h2{
+    font-size: 40px;
+}
+#contact-hero > div{
+    padding: 70px 20px;
+}
+#contact-hero > div p{
+    font-size: 15px;
+}
+}
