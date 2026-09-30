@@ -1,10 +1,14 @@
 #about-hero {
   width: 100%;
   min-height: 100vh;
-  background-image: url(/AboutBG.jpg);
+  min-height: 100svh;
+  background-image: url(/images/about-bg-1920.webp);
   background-position: center;
   background-size: cover;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #about-hero::after {
   content: " ";
@@ -14,47 +18,37 @@
   z-index: 2;
 }
 #story {
-  position: absolute;
+  position: relative;
   z-index: 3;
-  padding: 150px 50px 50px 50px;
+  padding: 150px var(--gutter) 80px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  inset: 0 0 0 0;
 }
-#story h2 {
-  font-family: "League Spartan", sans-serif;
-  font-size: 60px;
+#story h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
   margin-bottom: 20px;
 }
 #story p {
   max-width: 1000px;
-  font-size: 18px;
-  line-height: 200%;
+  font-size: var(--fs-lead);
+  line-height: 2;
 }
 #story p span {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 @media (max-width: 981px) {
-  #story {
-    position: relative;
-    padding: 50px 20px 50px 20px;
-    width: 100%;
-    height: 100%;
-  }
   #about-hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    min-height: auto;
+    background-image: url(/images/about-bg-960.webp);
   }
-  #story h2 {
-    font-size: 40px;
+  #story {
+    padding: 60px var(--gutter);
   }
   #story p {
-    font-size: 15px;
+    line-height: 1.85;
   }
 }

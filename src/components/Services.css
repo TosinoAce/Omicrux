@@ -1,36 +1,52 @@
 #services-container {
-  min-height: 100vh;
   text-align: center;
-  padding: 50px;
+  padding: var(--section-y) var(--gutter);
 }
 #services-container > h2 {
-  font-size: 60px;
+  font-size: var(--fs-h2);
+  font-family: var(--font-display);
   margin-bottom: 10px;
 }
+#services-container > p {
+  font-size: var(--fs-lead);
+}
 .parent {
-  min-width: 700px;
+  max-width: 1300px;
   min-height: 700px;
   display: grid;
   grid-template-columns: 1fr 0.2fr 1fr;
   grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 50px;
-  grid-row-gap: 50px;
-  margin-top: 100px;
-  padding: 0 70px;
+  gap: 50px;
+  margin: 80px auto 0;
+  padding: 0 20px;
 }
-.parent > div {
-  padding: 20px;
-  border-radius: 18px;
-  background: #1a1919;
-  box-shadow: 20px 20px 60px #161515, -20px -20px 60px #1e1d1d;
-  cursor: pointer;
+.parent > .service-card {
+  padding: 32px;
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 12px;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease,
+    transform 400ms var(--ease-out);
 }
-.parent > div:hover {
-  background: #87e64b;
-  transform: scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+  .parent > .service-card:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-bg);
+    transform: scale(1.02);
+  }
+}
+.parent > .service-card p {
+  font-size: var(--fs-small);
+  line-height: 1.8;
 }
 .div1 {
   grid-area: 1 / 1 / 2 / 3;
@@ -51,38 +67,46 @@
 .div5 {
   grid-area: 3 / 1 / 4 / 4;
 }
-.parent > div h3 {
-  font-size: 40px;
+.parent > .service-card h3 {
+  font-size: var(--fs-h3);
+  font-family: var(--font-display);
 }
 @media (max-width: 1098px) {
   .parent {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0 20px;
+    min-height: 0;
+    padding: 0;
     margin: 40px 0 0;
-    min-width: 300px;
   }
-  #services-container {
-    padding: 50px 20px;
+  .parent > .service-card {
+    padding: 24px 20px;
+    text-align: left;
   }
-  #services-container > p {
-    font-size: 13px;
+}
+
+/* "Learn more →": the cue that each card opens a detail page. */
+.service-more {
+  margin-top: 4px;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--color-accent);
+  transition: color 300ms ease;
+}
+.service-more::after {
+  content: " →";
+  display: inline-block;
+  transition: transform var(--dur) var(--ease-out);
+}
+.parent > .service-card:active {
+  transform: scale(0.99);
+}
+@media (hover: hover) and (pointer: fine) {
+  .parent > .service-card:hover .service-more {
+    color: var(--color-bg);
   }
-  #services-container h2 {
-    font-size: 40px;
-    margin-bottom: 5px;
-  }
-  .parent > div h3 {
-    font-size: 25px;
-    margin-bottom: 10px;
-  }
-  .parent > div p {
-    font-size: 13px;
-  }
-  .parent > div {
-    padding: 20px 10px;
+  .parent > .service-card:hover .service-more::after {
+    transform: translateX(4px);
   }
 }

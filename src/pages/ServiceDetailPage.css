@@ -1,0 +1,268 @@
+#service-detail {
+  --measure: 1000px;
+  padding: 150px var(--gutter) var(--section-y);
+}
+#service-detail > * {
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Header ===== */
+.service-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.service-back {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--color-muted);
+}
+.service-back:hover {
+  color: var(--color-accent);
+}
+.service-eyebrow {
+  color: var(--color-accent);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.service-header h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  max-width: 820px;
+}
+.service-tagline {
+  font-size: var(--fs-lead);
+  color: var(--color-muted);
+  margin-bottom: 12px;
+}
+
+/* ===== Intro ===== */
+.service-intro {
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: clamp(28px, 4vw, 40px);
+  border-top: var(--card-border);
+}
+.service-intro p {
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  line-height: 1.6;
+  max-width: 860px;
+}
+
+/* ===== Sections ===== */
+.service-section {
+  margin-top: clamp(48px, 7vw, 88px);
+}
+.service-section h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+/* What's included: check-marked grid */
+.service-included {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 12px;
+}
+.service-included li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border: var(--card-border);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+.service-included li::before {
+  content: "";
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-accent)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1919' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L19 7'/%3E%3C/svg%3E")
+    center / 14px no-repeat;
+}
+
+/* How we work: numbered steps */
+.service-process {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  counter-reset: none;
+}
+.service-process li {
+  padding: clamp(22px, 3vw, 28px);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+.step-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.6rem + 1.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent);
+  margin-bottom: 14px;
+}
+.service-process h3 {
+  font-size: var(--fs-h4);
+  margin-bottom: 8px;
+}
+.service-process p {
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+/* Ideal for + recommended package */
+.service-split {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 380px);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+.service-ideal li {
+  position: relative;
+  padding: 14px 0 14px 28px;
+  border-bottom: var(--card-border);
+  font-size: var(--fs-lead);
+}
+.service-ideal li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.service-package {
+  padding: clamp(24px, 3vw, 32px);
+  border-radius: var(--radius);
+  border: 1px solid #87e64b59;
+  background: #87e64b0d;
+}
+.service-package h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  margin-top: 6px;
+}
+.service-price {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  margin: 6px 0 18px;
+}
+.service-price span {
+  font-size: 0.5em;
+  font-weight: 500;
+  color: var(--color-muted);
+  margin-left: 4px;
+}
+.service-package li {
+  font-size: var(--fs-small);
+  padding: 7px 0;
+  border-bottom: var(--card-border);
+}
+.service-compare {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.service-compare::after {
+  content: " →";
+  display: inline-block;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+/* CTA band */
+.service-cta {
+  margin-top: clamp(56px, 8vw, 96px);
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: var(--radius);
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.service-cta h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  max-width: 560px;
+}
+
+/* Other services */
+.service-others {
+  margin-top: clamp(48px, 7vw, 80px);
+}
+.service-others h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  margin-bottom: 16px;
+}
+.service-others ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 12px;
+}
+.service-others a {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  border: var(--card-border);
+  transition:
+    border-color var(--dur) ease,
+    transform var(--dur) var(--ease-out);
+}
+.service-others a:active {
+  transform: scale(0.98);
+}
+.service-others-title {
+  font-weight: 700;
+}
+.service-others-tagline {
+  font-size: var(--fs-small);
+  color: var(--color-muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-others a:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+  }
+  .service-compare:hover::after {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 981px) {
+  #service-detail {
+    padding-top: 40px;
+  }
+  .service-split {
+    grid-template-columns: 1fr;
+  }
+  .service-header .btn,
+  .service-cta .btn {
+    width: 100%;
+  }
+}

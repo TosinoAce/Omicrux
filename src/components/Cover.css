@@ -1,25 +1,26 @@
 .hero {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   justify-content: center;
-  background-color: #1a1919;
+  background-color: var(--color-bg);
   position: relative;
 }
 #heroText {
   width: 65%;
-  padding: 100px 62px;
+  padding: 120px var(--gutter) 80px;
   box-shadow: 10px 0px 3px -6px rgba(20, 20, 20, 0.75);
-  -webkit-box-shadow: 10px 0px 3px -6px rgba(20, 20, 20, 0.75);
-  -moz-box-shadow: 10px 0px 3px -6px rgba(20, 20, 20, 0.75);
   align-self: center;
-  color: #fafafa;
+  color: var(--color-text);
 }
 #heroImg {
   width: 35%;
   position: relative;
 }
 #heroImg > img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -28,59 +29,91 @@
 #heroImg::after {
   content: " ";
   position: absolute;
-  height: 100%;
-  width: 100%;
   inset: 0 0 0 0;
   background-color: #00000078;
   z-index: 2;
 }
-h1 {
-  font-size: 60px;
-  font-weight: bolder;
-  font-family: "League Spartan", sans-serif;
+#heroText h1 {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  font-family: var(--font-display);
   text-transform: uppercase;
+  line-height: 1.1;
 }
-h1 span{
-    color: #87e64b;
-    font-size: 60px;
-    font-family: "League Spartan", sans-serif;
+#heroText h1 span{
+  color: var(--color-accent);
 }
-#heroText button{
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #87e64b;
-    color: #fafafa;
-    cursor: pointer;
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+#heroText .hero-cta{
+  margin-top: 28px;
 }
-#heroText button:hover{
-    background-color: #f5f5f5;
-    color: #000;
-    border: 1px solid #000;
+.hero-cta img{
+  transition: transform var(--dur) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine){
+  .hero-cta:hover img{
+    transform: translateX(5px);
+  }
+}
+
+/* ===== Entrance: plays as the intro curtain lifts (html.app-ready) ===== */
+.intro:not(.app-ready) #heroText h1,
+.intro:not(.app-ready) .hero-cta,
+.intro:not(.app-ready) #heroImg{
+  opacity: 0;
+}
+.app-ready #heroText h1{
+  animation: hero-rise 1000ms var(--ease-out) 150ms backwards;
+}
+.app-ready .hero-cta{
+  animation: hero-rise 900ms var(--ease-out) 330ms backwards;
+}
+.app-ready #heroImg{
+  animation: hero-wipe 1200ms var(--ease-out) backwards;
+}
+.app-ready #heroImg > img{
+  animation: hero-zoom 1600ms var(--ease-out) backwards;
+}
+@keyframes hero-rise{
+  from{
+    opacity: 0;
+    transform: translateY(40px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to{
+    clip-path: inset(0 0 -20% 0);
+  }
+}
+@keyframes hero-wipe{
+  from{ clip-path: inset(100% 0 0 0); }
+  to{ clip-path: inset(0 0 0 0); }
+}
+@keyframes hero-zoom{
+  from{ transform: scale(1.15); }
 }
 
 
 @media (max-width: 981px) {
-  #heroText{
-    position: absolute;
-    z-index: 3;
-    inset: 0 0 0 0;
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
+  .hero {
+    min-height: calc(100svh - var(--header-h));
+    align-items: flex-end;
   }
   #heroImg {
+    position: absolute;
+    inset: 0;
     width: 100%;
   }
-  .hero {
-    justify-content: flex-start;
+  #heroImg::after {
+    background: linear-gradient(to top, #1a1919f2 10%, #1a19198c 55%, #1a191940);
   }
-  h1, h1 span{
-    font-size: xx-large;
+  #heroText{
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding: 60px var(--gutter) 48px;
+    box-shadow: none;
+    align-self: flex-end;
+  }
+  #heroText .hero-cta{
+    width: 100%;
   }
 }

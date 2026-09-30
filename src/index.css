@@ -1,5 +1,60 @@
-@import url('https://fonts.cdnfonts.com/css/poppins');
-@import url('https://fonts.cdnfonts.com/css/league-spartan');
+/* Self-hosted fonts (latin only): no third-party requests, cached with the build. */
+@import "@fontsource/poppins/latin-400.css";
+@import "@fontsource/poppins/latin-500.css";
+@import "@fontsource/poppins/latin-700.css";
+@import "@fontsource-variable/league-spartan/wght.css";
+
+/* Metric-matched fallback so text doesn't jump when Poppins finishes loading. */
+@font-face {
+  font-family: "Poppins Fallback";
+  src: local("Arial");
+  size-adjust: 112.16%;
+  ascent-override: 93.62%;
+  descent-override: 31.21%;
+  line-gap-override: 8.92%;
+}
+
+:root{
+  /* Fonts */
+  --font-body: "Poppins", "Poppins Fallback", system-ui, sans-serif;
+  --font-display: "League Spartan Variable", "Poppins", "Poppins Fallback", system-ui, sans-serif;
+
+  /* Fluid type scale: min (phone) → max (desktop) */
+  --fs-hero: clamp(2rem, 1.2rem + 3.6vw, 3.75rem);      /* 32 → 60px */
+  --fs-h2: clamp(1.875rem, 1.3rem + 2.6vw, 3.75rem);    /* 30 → 60px */
+  --fs-h3: clamp(1.25rem, 1rem + 1.1vw, 2.5rem);        /* 20 → 40px */
+  --fs-h4: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);     /* 18 → 22px */
+  --fs-lead: clamp(0.9375rem, 0.88rem + 0.3vw, 1.125rem); /* 15 → 18px */
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-xs: 0.8125rem;
+
+  /* Colours */
+  --color-bg: #1a1919;
+  --color-text: #fafafa;
+  --color-muted: #c9c8c8;
+  --color-accent: #87e64b;
+  --color-light: #f5f5f5;
+
+  /* Layout */
+  --gutter: clamp(20px, 4vw, 62px);
+  --header-h: 56px;
+  --section-y: clamp(64px, 8vw, 100px);
+
+  /* Shape: one radius for controls, one for cards */
+  --radius-sm: 6px;
+  --radius: 18px;
+  --card-border: 1px solid #ffffff12;
+  --card-shadow: 20px 20px 60px #161515, -20px -20px 60px #1e1d1d;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 160ms;
+  --dur: 220ms;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -8,17 +63,134 @@
   text-decoration: none;
   outline: none;
   list-style: none;
-  font-family: "Poppins", sans-serif;
-  transition: 0.4s ease-in-out;
+  font-family: inherit;
+}
+html{
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+a, button, input, textarea{
+  transition:
+    color var(--dur) ease,
+    background-color var(--dur) ease,
+    border-color var(--dur) ease;
+}
+a, button{
+  color: inherit;
+}
+button, input, textarea{
+  font-size: inherit;
+}
+:focus-visible{
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 body{
   position: relative;
-  background-color: #1a1919;
-  color: #fafafa;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4{
+  line-height: 1.15;
+  text-wrap: balance;
+}
+p{
+  text-wrap: pretty;
+}
+img{
+  max-width: 100%;
+}
+.page-loader{
+  min-height: 100vh;
+}
+
+/* ===== Buttons: one system for every call to action ===== */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 28px;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--color-bg);
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    color var(--dur) ease,
+    background-color var(--dur) ease,
+    border-color var(--dur) ease,
+    transform var(--dur-fast) var(--ease-out);
+}
+.btn:active{
+  transform: scale(0.97);
+}
+.btn:disabled{
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+/* Dark variant for green or white backgrounds */
+.btn--dark{
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border-color: var(--color-bg);
+}
+@media (hover: hover) and (pointer: fine){
+  .btn:hover{
+    background-color: var(--color-light);
+    border-color: var(--color-light);
+  }
+  .btn--dark:hover{
+    color: var(--color-bg);
+    background-color: transparent;
+    border-color: var(--color-bg);
+  }
+}
+
+/* ===== Page transition between routes ===== */
+.page{
+  animation: page-in 420ms var(--ease-out) backwards;
+}
+@keyframes page-in{
+  from{ opacity: 0; transform: translateY(12px); }
+}
+
+/* ===== Scroll reveal (see hooks/useScrollReveal.js) =====
+   "reveal-on" is set on <html> before first paint, so content starts hidden
+   and fades up once it scrolls into view. Stagger with --reveal-delay. */
+.reveal-on [data-reveal]:not(.is-visible){
+  opacity: 0;
+}
+.reveal-on [data-reveal].is-visible{
+  animation: reveal-up 800ms var(--ease-out) var(--reveal-delay, 0ms) backwards;
+}
+@keyframes reveal-up{
+  from{ opacity: 0; transform: translateY(28px); }
 }
 
 @media (max-width: 981px) {
   body{
-    padding-top: 50px;
+    padding-top: var(--header-h);
+  }
+}
+
+/* Reduced motion: keep colour/opacity feedback, drop movement. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after{
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
   }
 }
