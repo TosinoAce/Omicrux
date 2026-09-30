@@ -1,38 +1,29 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import AboutPage from './pages/AboutPage.jsx'
-import BlogPage from './pages/BlogPage.jsx'
-import ContactPage from './pages/ContactPage.jsx'
-import ServicesPage from './pages/ServicesPage.jsx'
-import './index.css'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routes, { pageImports } from './routes.jsx'
+import './index.css'
+import finishIntro from './intro.js'
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "about",
-    element: <AboutPage />,
-  },
-  {
-    path: "contact",
-    element: <ContactPage />,
-  },
-  {
-    path: "services",
-    element: <ServicesPage />,
-  },
-  {
-    path: "blog",
-    element: <BlogPage />,
-  }
-]);
-
-createRoot(document.getElementById('root')).render(
+const router = createBrowserRouter(routes)
+const app = (
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>
 )
+
+// Pages are pre-rendered to HTML at build time (scripts/prerender.mjs):
+// attach to that markup instead of re-rendering it. The dev server has none.
+const container = document.getElementById('root')
+if (container.firstElementChild) hydrateRoot(container, app)
+else createRoot(container).render(app)
+
+finishIntro()
+
+// Once the first page has loaded and the browser is idle, fetch the other
+// (small) page chunks so navigating between pages is instant.
+const prefetchPages = () => Object.values(pageImports).forEach((load) => load())
+window.addEventListener('load', () => {
+  if ('requestIdleCallback' in window) requestIdleCallback(prefetchPages, { timeout: 3000 })
+  else setTimeout(prefetchPages, 2000)
+})

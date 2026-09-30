@@ -2,12 +2,233 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/small-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Omicrux</title>
+    <meta name="theme-color" content="#1a1919" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Page title, description, canonical, social tags and JSON-LD are injected
+         per page by scripts/prerender.mjs (and kept in sync by <Seo />). -->
+    <!--seo-tags-->
+    <!-- Preload the two fonts used above the fold (body text + headings). -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="/node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="/node_modules/@fontsource-variable/league-spartan/files/league-spartan-latin-wght-normal.woff2"
+    />
+    <link rel="preload" as="image" href="/images/logo-white-600.webp" />
+    <title data-seo>Omicrux | PR &amp; Branding Agency in Nigeria</title>
+
+    <!--
+      First-load intro. Runs once per browser session and is skipped for
+      reduced-motion users. <html> classes:
+        intro      – the loader is playing
+        app-ready  – the loader is gone; hero entrance + scroll reveals may start
+        reveal-on  – scroll-reveal animations are enabled
+      src/intro.js removes the loader once the app, fonts and images are ready.
+    -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduce && "IntersectionObserver" in window) root.classList.add("reveal-on");
+        var seen = true;
+        try {
+          seen = !!sessionStorage.getItem("omx-intro");
+          sessionStorage.setItem("omx-intro", "1");
+        } catch (e) {}
+        if (seen || reduce) {
+          root.classList.add("app-ready");
+        } else {
+          root.classList.add("intro");
+          // Failsafe: never leave the page covered if something goes wrong.
+          setTimeout(function () {
+            root.classList.add("app-ready");
+            root.classList.remove("intro");
+          }, 7000);
+        }
+      })();
+    </script>
+    <style>
+      #intro { display: none; }
+      .intro #intro {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        pointer-events: none;
+      }
+      .intro body { overflow: hidden; }
+
+      /* Two stacked curtains: dark on top, brand green underneath. */
+      .intro-panel,
+      .intro-curtain {
+        position: absolute;
+        inset: 0;
+        will-change: clip-path;
+      }
+      .intro-curtain { background: #87e64b; }
+      .intro-panel {
+        background: #1a1919;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .intro-logo {
+        --size: clamp(52px, 11vw, 104px);
+        display: flex;
+        align-items: center;
+        font-family: "League Spartan Variable", "Poppins", Arial, sans-serif;
+        font-size: var(--size);
+        font-weight: 700;
+        line-height: 1;
+        color: #fafafa;
+        letter-spacing: -0.02em;
+      }
+
+      /* The mark: omicron (circle) + crux (four-point star). */
+      .intro-mark {
+        width: 0.66em;
+        height: 0.66em;
+        flex: none;
+        overflow: visible;
+        margin-top: 0.1em;
+      }
+      .intro-ring {
+        fill: none;
+        stroke: #87e64b;
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-dasharray: 290;
+        stroke-dashoffset: 290;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+        animation: intro-draw 750ms cubic-bezier(0.65, 0, 0.35, 1) 100ms forwards;
+      }
+      .intro-disc {
+        fill: #fafafa;
+        opacity: 0;
+        transform: scale(0.8);
+        transform-origin: 50% 50%;
+        animation: intro-fill 420ms cubic-bezier(0.23, 1, 0.32, 1) 700ms forwards;
+      }
+      .intro-star {
+        fill: #1a1919;
+        opacity: 0;
+        transform: rotate(-135deg) scale(0.3);
+        transform-origin: 50% 50%;
+        animation:
+          intro-star 650ms cubic-bezier(0.34, 1.4, 0.64, 1) 900ms forwards,
+          intro-spin 1400ms cubic-bezier(0.77, 0, 0.175, 1) 2100ms infinite;
+      }
+
+      /* "micrux" slides out from behind the mark, letter by letter. */
+      .intro-word {
+        display: flex;
+        max-width: 0;
+        overflow: hidden;
+        padding-bottom: 0.12em;
+        margin-bottom: -0.12em;
+        animation: intro-open 700ms cubic-bezier(0.77, 0, 0.175, 1) 1150ms forwards;
+      }
+      .intro-word span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(0.6em);
+        animation: intro-letter 600ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        animation-delay: calc(1250ms + var(--i) * 55ms);
+      }
+      .intro-word span:first-child { margin-left: 0.04em; }
+
+      /* Thin progress line under the logo. */
+      .intro-line {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + clamp(52px, 11vw, 104px) * 0.75);
+        width: clamp(120px, 30vw, 260px);
+        height: 2px;
+        margin-left: calc(clamp(120px, 30vw, 260px) / -2);
+        background: #ffffff1a;
+        overflow: hidden;
+        border-radius: 2px;
+      }
+      .intro-line::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: #87e64b;
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: intro-progress 1900ms cubic-bezier(0.65, 0, 0.35, 1) 150ms forwards;
+      }
+
+      /* Exit: logo lifts away, then the curtains wipe upward. */
+      .intro-exit .intro-logo,
+      .intro-exit .intro-line {
+        transition: opacity 300ms ease, transform 450ms cubic-bezier(0.23, 1, 0.32, 1);
+        opacity: 0;
+        transform: translateY(-24px);
+      }
+      .intro-exit .intro-panel {
+        animation: intro-wipe 800ms cubic-bezier(0.77, 0, 0.175, 1) 150ms forwards;
+      }
+      .intro-exit .intro-curtain {
+        animation: intro-wipe 800ms cubic-bezier(0.77, 0, 0.175, 1) 290ms forwards;
+      }
+
+      @keyframes intro-draw { to { stroke-dashoffset: 0; } }
+      @keyframes intro-fill { to { opacity: 1; transform: scale(1); } }
+      @keyframes intro-star { to { opacity: 1; transform: rotate(0deg) scale(1); } }
+      @keyframes intro-spin { 55%, 100% { transform: rotate(90deg); } }
+      @keyframes intro-open { to { max-width: 3.4em; } }
+      @keyframes intro-letter { to { opacity: 1; transform: translateY(0); } }
+      @keyframes intro-progress { to { transform: scaleX(1); } }
+      @keyframes intro-wipe {
+        from { clip-path: inset(0 0 0 0); }
+        to { clip-path: inset(0 0 100% 0); }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Hidden copy of the contact form so Netlify Forms detects it at build time. -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="firstName" />
+      <input type="text" name="lastName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="message"></textarea>
+    </form>
+    <div id="intro" aria-hidden="true">
+      <div class="intro-curtain"></div>
+      <div class="intro-panel">
+        <div class="intro-logo">
+          <svg class="intro-mark" viewBox="0 0 100 100">
+            <circle class="intro-disc" cx="50" cy="50" r="46" />
+            <circle class="intro-ring" cx="50" cy="50" r="46" />
+            <path
+              class="intro-star"
+              d="M50 20 Q53.5 46.5 80 50 Q53.5 53.5 50 80 Q46.5 53.5 20 50 Q46.5 46.5 50 20Z"
+            />
+          </svg>
+          <span class="intro-word">
+            <span style="--i: 0">m</span><span style="--i: 1">i</span><span style="--i: 2">c</span><span style="--i: 3">r</span><span style="--i: 4">u</span><span style="--i: 5">x</span>
+          </span>
+        </div>
+        <div class="intro-line"></div>
+      </div>
+    </div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

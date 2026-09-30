@@ -1,12 +1,18 @@
-import React from 'react'
-import MainLayout from '../layout/MainLayout'
+import PageHeader from "../components/PageHeader";
+import BlogPosts from "../components/BlogPosts";
 
 const BlogPage = () => {
   return (
-    <MainLayout>
-        <h2>blogpage</h2>
-    </MainLayout>
-  )
-}
+    <>
+      <PageHeader title="Insights & Stories">
+        <p>
+          Ideas, tips and behind-the-scenes stories from the Omicrux team on
+          branding, PR, content and building brands that last.
+        </p>
+      </PageHeader>
+      <BlogPosts />
+    </>
+  );
+};
 
-export default BlogPage
+export default BlogPage;

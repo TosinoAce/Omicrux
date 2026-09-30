@@ -1,0 +1,14 @@
+#privacy {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px var(--gutter) var(--section-y);
+}
+#privacy h3 {
+  font-size: var(--fs-h4);
+  margin: 30px 0 10px;
+  color: var(--color-accent);
+}
+#privacy p {
+  line-height: 1.9;
+  color: var(--color-muted);
+}

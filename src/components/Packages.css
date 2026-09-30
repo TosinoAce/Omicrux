@@ -1,21 +1,23 @@
 #packages-container {
   width: 100%;
-  min-height: 60vh;
-  padding: 50px;
-  color: #1a1919;
+  padding: var(--section-y) var(--gutter);
+  color: var(--color-bg);
   background-color: #ffffff;
 }
 #packages-container > h2 {
   text-align: center;
-  font-size: 40px;
+  font-size: var(--fs-h2);
+  font-family: var(--font-display);
+  margin-bottom: 10px;
 }
 #packages-container > h2 > span {
-  color: #87e64b;
+  color: #3d8b17; /* darker brand green: readable on white */
 }
 #packages-container > p {
-  margin-bottom: 50px;
+  max-width: 700px;
+  margin: 0 auto clamp(36px, 5vw, 60px);
   text-align: center;
-  font-size: 18px;
+  font-size: var(--fs-lead);
 }
 .overlay {
   display: flex;
@@ -27,51 +29,55 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 20px 30px;
+  padding: 32px 30px;
 }
 .overlay h2 {
-  font-size: 30px;
-  color: #87e64b;
+  font-size: clamp(1.625rem, 1.4rem + 0.8vw, 1.875rem);
+  font-family: var(--font-display);
+  color: var(--color-accent);
 }
 .overlay p {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
+  font-size: var(--fs-small);
 }
 .overlay h3 {
   margin-bottom: 10px;
+  font-size: var(--fs-h4);
 }
 .overlay li {
   margin-bottom: 10px;
+  font-size: var(--fs-small);
 }
 .div-1 {
   text-align: left;
   width: 300px;
-  height: 450px;
-  background-color: #1a1919;
+  min-height: 450px;
+  background-color: var(--color-bg);
   border: 1px solid #9df963f5;
   color: #ffffff;
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
   align-items: flex-start;
 }
 .div-2 {
   width: 350px;
-  height: 550px;
-  background-color: #87e64b;
-  border-radius: 7px;
-  color: white;
+  min-height: 550px;
+  background-color: var(--color-accent);
+  border-radius: var(--radius);
+  color: var(--color-bg);
   text-align: center;
   align-items: center;
 }
 .div-2 h2 {
   color: #000;
-  font-size: 35px;
+  font-size: clamp(1.875rem, 1.6rem + 0.9vw, 2.1875rem);
 }
 .div-3 {
   width: 300px;
-  height: 450px;
-  background-color: #1a1919;
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
+  min-height: 450px;
+  background-color: var(--color-bg);
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
   color: #ffffff;
   border: 1px solid #9df963f5;
   align-items: flex-end;
@@ -81,40 +87,45 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 80px 0 30px 0;
+  margin: clamp(40px, 6vw, 80px) 0 0;
   gap: 10px;
 }
-.button button {
-  padding: 12px 24px;
-  border-radius: 24px;
-  background-color: #87e64b;
-  font-size: 15px;
+/* On the white section the light hover would vanish, so invert to dark. */
+@media (hover: hover) and (pointer: fine) {
+  #packages-container .btn:hover {
+    background-color: var(--color-bg);
+    border-color: var(--color-bg);
+    color: var(--color-accent);
+  }
 }
 
-@media (max-width: 800px) {
-  #packages-container > h2 {
-    font-size: 30px;
-  }
-  #packages-container > p {
-    font-size: 15px;
-  }
+@media (max-width: 1000px) {
   .overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
     flex-direction: column;
+    align-items: stretch;
     gap: 20px;
+    max-width: 440px;
+    margin: 0 auto;
   }
   .overlay > div{
     align-items: flex-start;
   }
   .div-1, .div-2, .div-3{
-    width: 300px;
-    border-radius: 7px;
+    width: 100%;
+    min-height: 0;
+    border-radius: var(--radius);
     text-align: left;
   }
-  .button{
-    margin: 50px 0 0 0;
+  .button .btn{
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
   }
+}
+
+/* Naira amounts are longer than the old dollar prices: keep "/Month" smaller. */
+.overlay h2 .per-month {
+  font-size: 0.55em;
+  font-weight: 500;
+  margin-left: 2px;
 }
