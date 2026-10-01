@@ -1,7 +1,8 @@
 // Ends the first-load intro defined in index.html.
-// Waits for the intro animation to finish (MIN_MS) and for fonts + page images
-// (capped at MAX_WAIT_MS), then wipes the curtains away and marks the app ready.
-const MIN_MS = 2100;
+// Waits for the whole intro animation to finish (MIN_MS: the last "micrux"
+// letter lands at ~2.13s, plus a short hold on the complete logo) and for
+// fonts + page images (capped at MAX_WAIT_MS), then wipes the curtains away.
+const MIN_MS = 2450;
 const MAX_WAIT_MS = 4000;
 const WIPE_MS = 1100;
 const READY_AT_MS = 200; // hero entrance starts under the lifting curtains
