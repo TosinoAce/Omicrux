@@ -1,8 +1,10 @@
-// Omicrux services: the Services page cards and each /services/:slug detail page.
+// Omicrux services: the Services page cards, the home page gallery and each
+// /services/:slug detail page.
 // Detail copy (included, process, idealFor) is placeholder text: adjust to the real offer.
 const services = [
   {
     slug: "brand-identity-development",
+    image: "/images/brand-identity-1400.webp",
     title: "Brand Identity & Development",
     tagline: "Brands people recognise, remember and trust.",
     summary:
@@ -28,6 +30,7 @@ const services = [
   },
   {
     slug: "pr-social-media-content",
+    image: "/images/blog-2-1400.webp",
     title: "PR / Social Media & Content",
     tagline: "Stay top of mind with content your audience actually wants.",
     summary:
@@ -53,6 +56,7 @@ const services = [
   },
   {
     slug: "brand-activation-experiential-marketing",
+    image: "/images/services-bg-1920.webp",
     title: "Branding Activation / Experiential Marketing",
     tagline: "Put your brand in people’s hands, not just in front of their eyes.",
     summary:
@@ -78,6 +82,7 @@ const services = [
   },
   {
     slug: "web-solutions",
+    image: "/images/blog-3-1400.webp",
     title: "Web Solutions",
     tagline: "A website that looks great and works even harder.",
     summary:
@@ -103,6 +108,7 @@ const services = [
   },
   {
     slug: "event-strategy-management",
+    image: "/images/about-bg-1920.webp",
     title: "Event Strategy & Management",
     tagline: "Events that feel effortless, because every detail is handled.",
     summary:

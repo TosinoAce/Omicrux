@@ -17,6 +17,7 @@ const images = [
   { src: "pexels-ivan-samkov-8117415.jpg", name: "blog-3", widths: [800, 1400] },
   { src: "pexels-rdne-7647996.jpg", name: "blog-4", widths: [800, 1400] },
   { src: "omicrux-logo-white.png", name: "logo-white", widths: [600] },
+  { src: "1739796776248.jpg", name: "brand-identity", widths: [800, 1400] },
 ];
 
 await mkdir(OUT, { recursive: true });

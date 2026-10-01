@@ -1,0 +1,104 @@
+.founders {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: var(--section-y) var(--gutter);
+  overflow: hidden;
+}
+.founders-copy h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.founders-copy em {
+  font-style: normal;
+  color: var(--color-accent);
+}
+.founders-copy p {
+  max-width: 46ch;
+  font-size: var(--fs-lead);
+  color: var(--color-muted);
+  margin-bottom: 20px;
+}
+.founders-link {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.founders-link::after {
+  content: " →";
+  display: inline-block;
+  transition: transform var(--dur) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .founders-link:hover::after {
+    transform: translateX(4px);
+  }
+}
+
+/* Two monograms, offset so they read as a pair rather than a row of cards. */
+.founders-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 3vw, 32px);
+}
+.founder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+.founder:nth-child(2) {
+  margin-top: clamp(48px, 8vw, 120px);
+}
+.founder-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1;
+  margin-bottom: 14px;
+}
+.founder-mark svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.founder-ring {
+  fill: #87e64b0d;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 290;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+.founder-mark > span {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.6rem + 2.6vw, 4rem);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.founder-name {
+  font-weight: 700;
+}
+.founder-role {
+  font-size: var(--fs-small);
+  color: var(--color-muted);
+}
+
+@media (max-width: 767px) {
+  .founders {
+    grid-template-columns: 1fr;
+  }
+  .founder:nth-child(2) {
+    margin-top: 48px;
+  }
+}

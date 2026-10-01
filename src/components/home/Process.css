@@ -1,0 +1,102 @@
+.process {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 6vw, 96px);
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: var(--section-y) var(--gutter);
+}
+.process-intro {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+}
+.process-intro h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  margin-bottom: 14px;
+}
+.process-intro p {
+  font-size: var(--fs-lead);
+  color: var(--color-muted);
+  max-width: 34ch;
+}
+
+.process-body {
+  position: relative;
+  padding-left: clamp(28px, 4vw, 48px);
+}
+.process-line {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: #ffffff14;
+}
+.process-line span {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: top;
+}
+.process-steps {
+  display: grid;
+  gap: clamp(48px, 9vh, 96px);
+}
+.process-step {
+  position: relative;
+}
+/* Marker on the line, filled once the step is reached. */
+.process-step::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * clamp(28px, 4vw, 48px) - 7px);
+  top: 0.55em;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  background: var(--color-bg);
+  transition:
+    background-color 300ms ease,
+    transform 400ms var(--ease-out);
+}
+.process-step.is-active h3 {
+  color: var(--color-text);
+}
+.process-step.is-active::before {
+  background: var(--color-accent);
+  transform: scale(1.15);
+}
+.process-step h3 {
+  color: var(--color-muted);
+  transition: color 400ms ease;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 4rem);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.process-step p {
+  max-width: 46ch;
+  font-size: var(--fs-lead);
+  color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-step::before {
+    background: var(--color-accent);
+  }
+  .process-step h3 {
+    color: var(--color-text);
+  }
+}
+
+@media (max-width: 767px) {
+  .process {
+    grid-template-columns: 1fr;
+  }
+  .process-intro {
+    position: static;
+  }
+}

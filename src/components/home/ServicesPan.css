@@ -1,0 +1,168 @@
+.pan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(24px, 4vh, 40px);
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(48px, 7vh, 72px) 0;
+  background: var(--color-bg);
+}
+.pan-head {
+  padding: 0 var(--gutter);
+}
+.pan-head h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  margin-bottom: 8px;
+}
+.pan-head p {
+  font-size: var(--fs-lead);
+  color: var(--color-muted);
+  max-width: 44ch;
+}
+
+/* Native, swipeable row by default; GSAP takes over on desktop. */
+.pan-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.pan-viewport::-webkit-scrollbar {
+  display: none;
+}
+.pan-track {
+  display: flex;
+  gap: clamp(16px, 2.4vw, 32px);
+  width: max-content;
+  padding: 0 var(--gutter);
+}
+
+.pan-card {
+  flex: none;
+  width: min(58vw, 860px);
+  height: clamp(360px, 60svh, 620px);
+  scroll-snap-align: start;
+  scroll-margin-left: var(--gutter);
+}
+.pan-card a {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: var(--card-border);
+  isolation: isolate;
+}
+.pan-card img {
+  position: absolute;
+  inset: 0 -8%;
+  width: 116%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  transition: scale 900ms var(--ease-out);
+}
+/* Scrim keeps the text readable on any photo. */
+.pan-card a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, #1a1919f2 8%, #1a191999 45%, #1a191926 100%);
+}
+.pan-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(24px, 3vw, 40px);
+}
+.pan-card-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.1;
+  max-width: 16ch;
+}
+.pan-card-tagline {
+  max-width: 40ch;
+  color: var(--color-muted);
+}
+.pan-card-more {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.pan-card-more::after {
+  content: " →";
+  display: inline-block;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+/* Closing card: a plain call to the full services page. */
+.pan-card--end {
+  width: min(34vw, 420px);
+}
+.pan-card--end a {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: clamp(24px, 3vw, 40px);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+}
+.pan-card--end a::after {
+  display: none;
+}
+.pan-card--end .pan-card-more {
+  color: var(--color-bg);
+}
+
+.pan-card a:active {
+  transform: scale(0.99);
+}
+@media (hover: hover) and (pointer: fine) {
+  .pan-card a:hover img {
+    scale: 1.04;
+  }
+  .pan-card a:hover .pan-card-more::after {
+    transform: translateX(4px);
+  }
+}
+
+/* Progress line (only animated on desktop). */
+.pan-progress {
+  margin: 0 var(--gutter);
+  height: 2px;
+  overflow: hidden;
+}
+.pan-progress span {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (max-width: 767px) {
+  .pan {
+    min-height: 0;
+    padding: var(--section-y) 0;
+  }
+  .pan-card {
+    width: 82vw;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+  .pan-card--end {
+    width: 64vw;
+  }
+  .pan-progress {
+    display: none;
+  }
+}
